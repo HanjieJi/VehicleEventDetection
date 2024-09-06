@@ -4,31 +4,7 @@ from matplotlib.path import Path
 import cv2
 
 # json和mp4公共的文件名
-# file_common_name = '2C0D5D26-42ED-45F0-84BF-C54B8D11DFF9'   # 停驶
-# file_common_name = '1757C1CB-626B-4C7E-B54A-7D3A0D5F3B2C'   # 停驶
-# file_common_name = '2774078E-58F1-4BBF-9A66-860385A9D93C'   # 停驶
-# file_common_name = 'A333D742-A47E-45D8-A7D7-A8AAE2819CBB'   # 停驶
-# file_common_name = 'A0458F86-96D5-40B2-9C90-FEE88B32F2A7'   # 停驶
-# file_common_name = 'nixing1'    # 逆行
-# file_common_name = '8A6569F6-74DB-4B52-B121-3269EB6B8024'   # 拥堵
-# file_common_name = '25A4BBFC-A324-4EB3-8163-48FB6613268A'   # 拥堵
-# file_common_name = '634EE3DE-24C1-42DF-8122-B852BBCA83FE'   # 拥堵
-# file_common_name = '60-1-K96+600-336.8-341.5-1'   # 60km
-# file_common_name = '60-4-K100+000-72.8-352.8-1'   # 60km
-# file_common_name = '60-5-K100+600-164.6-348.8-1.1'   # 60km
-# file_common_name = '60-6-K102+400-164.4-351.4-1'   # 60km
-# file_common_name = '80-1-K96+600-336.8-341.5-1'   # 80km
-# file_common_name = '80-4-K100+600-164.6-348.8-1.1'   # 80km
-# file_common_name = '80-5-K102+400-164.4-351.4-1'   # 80km
-# file_common_name = '100-1-K96+600-336.8-341.5-1'   # 100km
-# file_common_name = '100-3-K100+000-72.8-352.8-1'   # 100km
-# file_common_name = '100-4-K100+600-164.6-348.8-1.1'   # 100km
-# file_common_name = '100-5-K102+400-164.4-351.4-1'   # 100km
-# file_common_name = '丽水北站出口外广场_174_04_1_30'  # 30km
-# file_common_name = '丽水北站出口外广场_166_11_1_40'  # 40km
-file_common_name = '丽水北站出口外广场_174_11_1_50'  # 50km
-
-
+file_common_name = '60-1-K96+600-336.8-341.5-1'   # 60km
 
 vertices_near = []  # 近向车道的点
 # vertices_near = [[0, 0], [0.1, 0], [0, 0.1], [0.1, 0.1]]  # 隧道近向车道的点
@@ -36,21 +12,6 @@ vertices_far = []   # 远向车道的点
 car_lane = 4    # 车道数
 
 # 目标和对应的label_id
-# 0	car（小车）
-# 1	truck（卡车）
-# 2	safety_cone（安全锥）
-# 3	yellow_car（施工车）
-# 4	bus（客车）
-# 5	tanker（油罐车）
-# 6	person（行人）
-# 7	reflective（反光）
-# 8	motorbike（非机动车）
-# 9	spill（抛撒物）
-# 10 fire（火焰）
-# 11 smog（烟雾）
-# 12 yellow_person（施工人员）
-# 13 Bumper_drum(防撞桶)
-# 14 signage（标志牌）
 target_label = ['car', 'truck', 'safety_cone', 'yellow_car', 'bus', 'tanker', 'person', 'reflective', 'motorbike',
                 'spill', 'fire', 'smog', 'yellow_person', 'Bumper_drum', 'signage']
 
@@ -232,20 +193,13 @@ def main():
     available = [0, 1, 3, 4, 5]     # 用于判断车辆的label_ids
     warning = []    # 告警类型
     # 读取车辆json文件
-    # path_data = 'videos/路测视频/20240723路测视频_jsons/jsons/' + file_common_name + '.json'
-    # path_data = 'videos/事件类型视频/逆行/' + file_common_name + '.json'
-    path_data = 'videos/路测视频/丽水北收费站0822/' + file_common_name + '.json'
-    # path_data = 'videos/事件类型视频/拥堵/{' + file_common_name + '}.json'
     # path_data = 'videos/路测视频/路测0801/jsons/' + file_common_name + '.json'
     with open(path_data, 'r', encoding='UTF-8') as f_data:
         js_dt = json.load(f_data)
     target = []  # 所有目标
     target_index = []  # 主键：(target_id)*100+label_id
     # 读取车道json文件
-    # path_lane = 'videos/路测视频/20240723路测视频_jsons/img/' + file_common_name + '.json'
-    # path_lane = 'videos/事件类型视频/img/' + file_common_name + '.json'
-    path_lane = 'videos/路测视频/丽水北收费站0822/img/' + file_common_name + '.json'
-    # path_lane = 'videos/路测视频/路测0801/img/' + file_common_name + '.json'
+    path_lane = 'videos/路测视频/路测0801/img/' + file_common_name + '.json'
     with open(path_lane, 'r', encoding='UTF-8') as f_lane:
         js_ln = json.load(f_lane)
 
